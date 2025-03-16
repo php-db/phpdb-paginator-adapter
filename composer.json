@@ -1,0 +1,74 @@
+{
+    "name": "axleus/laminas-db-paginator-adapter",
+    "description": "laminas-db adapters for laminas-paginator.",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "laminas",
+        "pagination",
+        "db"
+    ],
+    "homepage": "https://github.com/axleus/laminas-db-paginator-adapter/discussions",
+    "support": {
+        "issues": "https://github.com/alxeus/laminas-db-paginator-adapter/issues",
+        "source": "https://github.com/axleus/laminas-db-paginator-adapter",
+        "forum": "https://github.com/axleus/laminas-db-paginator-adapter/discussions"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.99"
+        },
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "extra": {
+        "laminas": {
+            "component": "Laminas\\Db\\Mysql",
+            "config-provider": "Laminas\\Db\\Mysql\\ConfigProvider"
+        }
+    },
+    "require": {
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+        "laminas/laminas-paginator": "^2.19.0",
+        "axleus/laminas-db": "dev-3.0.x"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "^3.0.1",
+        "phpunit/phpunit": "^9.5.25",
+        "psalm/plugin-phpunit": "^0.19.2",
+        "vimeo/psalm": "^6.8.8"
+    },
+    "suggest": {
+        "laminas/laminas-servicemanager": "Laminas\\ServiceManager component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Db\\Paginator\\Adapter\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Db\\Paginator\\Adapter\\": "test/unit/",
+            "LaminasIntegrationTest\\Db\\Paginator\\Adapter\\": "test/integration/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always --testsuite \"unit test\"",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "test-integration": "phpunit --colors=always --testsuite \"integration test\"",
+        "static-analysis": "psalm --shepherd --stats",
+        "upload-coverage": "coveralls -v"
+    },
+    "conflict": {
+        "laminas/laminas-paginator-adapter-laminasdb": "*"
+    }
+}
