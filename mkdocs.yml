@@ -1,0 +1,19 @@
+docs_dir: docs/book
+site_dir: docs/html
+nav:
+    - Home: index.md
+    - v1:
+      - Introduction: v1/intro.md
+      - "DbSelect Adapter": v1/db-select.md
+      - "DbTableGateway Adapter": v1/db-table-gateway.md
+site_name: 'laminas-paginator-adapter-laminasdb (Abandoned)'
+site_description: 'laminas-db adapters for laminas-paginator'
+repo_url: 'https://github.com/laminas/laminas-paginator-adapter-laminasdb'
+extra:
+    project: Components
+    installation:
+        config_provider_class: 'Laminas\Db\Paginator\Adapter\ConfigProvider'
+        module_class: 'Laminas\Db\Paginator\Adapter\Module'
+    current_version: v1
+    versions:
+      - v1
