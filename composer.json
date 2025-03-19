@@ -51,8 +51,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LaminasTest\\Db\\Paginator\\Adapter\\": "test/unit/",
-            "LaminasIntegrationTest\\Db\\Paginator\\Adapter\\": "test/integration/"
+            "LaminasTest\\Db\\Paginator\\Adapter\\": "test/"
         }
     },
     "scripts": {

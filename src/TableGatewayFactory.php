@@ -12,13 +12,10 @@ use ReflectionException;
 class TableGatewayFactory extends AbstractAdapterFactory
 {
     /**
-     * @param ContainerInterface $container
-     * @param string             $requestedName
      * @param array|null         $options
      * @throws InvalidArgumentException
      * @throws UnexpectedValueException
      * @throws ReflectionException
-     * @return Select
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): Select
     {

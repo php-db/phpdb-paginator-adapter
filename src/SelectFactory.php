@@ -12,13 +12,11 @@ use ReflectionException;
 class SelectFactory extends AbstractAdapterFactory
 {
     /**
-     * @param ContainerInterface $container
-     * @param string             $requestedName
+     * @param class-string       $requestedName
      * @param array|null         $options
      * @throws InvalidArgumentException
      * @throws UnexpectedValueException
      * @throws ReflectionException
-     * @return Select
      */
     public function __invoke(ContainerInterface $container, string $requestedName, ?array $options = null): Select
     {

@@ -9,9 +9,9 @@ use Laminas\Db\Adapter\Driver\DriverInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Adapter\Driver\StatementInterface;
 use Laminas\Db\Adapter\Platform\PlatformInterface;
+use Laminas\Db\Paginator\Adapter\Select;
 use Laminas\Db\Sql;
 use Laminas\Paginator\Adapter\Exception\MissingRowCountColumnException;
-use Laminas\Db\Paginator\Adapter\Select;
 use PHPUnit\Framework\MockObject\Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -19,9 +19,6 @@ use PHPUnit\Framework\TestCase;
 use function array_keys;
 use function strtolower;
 
-/**
- * @covers Laminas\Db\Paginator\Adapter\Select<extended>
- */
 final class DbSelectTest extends TestCase
 {
     /** @var MockObject|Sql\Select */
@@ -45,7 +42,7 @@ final class DbSelectTest extends TestCase
     /**
      * @throws Exception
      */
-    #[\Override]
+    #![Override]
     public function setUp(): void
     {
         $this->mockResult    = $this->createMock(ResultInterface::class);

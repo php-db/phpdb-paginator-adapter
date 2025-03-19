@@ -2,23 +2,19 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\Paginator\Db\Adapter;
+namespace LaminasTest\Db\Paginator\Adapter;
 
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Db\Adapter\Driver\DriverInterface;
 use Laminas\Db\Adapter\Driver\ResultInterface;
 use Laminas\Db\Adapter\Driver\StatementInterface;
 use Laminas\Db\Adapter\Platform\Sql92;
-use Laminas\Db\TableGateway\TableGateway as BaseTableGateway;
 use Laminas\Db\Paginator\Adapter\Select;
 use Laminas\Db\Paginator\Adapter\TableGateway;
-use PHPUnit\Framework\MockObject\Exception;
+use Laminas\Db\TableGateway\TableGateway as BaseTableGateway;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers  Laminas\Db\Paginator\Adapter\TableGateway<extended>
- */
 final class DbTableGatewayTest extends TestCase
 {
     /** @var MockObject|StatementInterface */
@@ -30,7 +26,7 @@ final class DbTableGatewayTest extends TestCase
     /** @var MockObject|BaseTableGateway */
     protected $mockTableGateway;
 
-    #[\Override]
+    #![Override]
     public function setup(): void
     {
         $mockStatement = $this->createMock(StatementInterface::class);
@@ -49,16 +45,14 @@ final class DbTableGatewayTest extends TestCase
             [$mockDriver, new Sql92()]
         );
 
-
         $tableName        = 'foobar';
         $mockTableGateway = $this->getMockForAbstractClass(
             BaseTableGateway::class,
             [$tableName, $mockAdapter]
         );
 
-        $this->mockStatement = $mockStatement;
+        $this->mockStatement    = $mockStatement;
         $this->mockTableGateway = $mockTableGateway;
-
     }
 
     public function testGetItems(): void

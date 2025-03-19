@@ -9,6 +9,11 @@ use Laminas\Db\Paginator\Adapter\Exception\UnexpectedValueException;
 use ReflectionClass;
 use ReflectionException;
 
+use function class_exists;
+use function count;
+use function is_subclass_of;
+use function sprintf;
+
 abstract class AbstractAdapterFactory
 {
     /**
@@ -16,7 +21,6 @@ abstract class AbstractAdapterFactory
      * @param class-string $requestedName
      * @param array|null   $options
      * @throws ReflectionException
-     * @return Select
      */
     protected function buildAdapter(
         string $baseAdapterClass,
@@ -70,12 +74,11 @@ abstract class AbstractAdapterFactory
         $instance = $classReflection->newInstanceArgs($options);
 
         // Validate the instance type
-        if (! ($instance instanceof Select)) {
+        if (! $instance instanceof Select) {
             throw new UnexpectedValueException(sprintf(
                 'Expected instance of %s, got %s instead.',
                 $baseAdapterClass,
-                get_class($instance)
-
+                $instance::class
             ));
         }
 

@@ -9,9 +9,6 @@
     <PossiblyUnusedParam>
       <code><![CDATA[$container]]></code>
     </PossiblyUnusedParam>
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$requestedName]]></code>
-    </ArgumentTypeCoercion>
   </file>
   <file src="src/TableGatewayFactory.php">
     <PossiblyUnusedParam>

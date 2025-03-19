@@ -13,6 +13,11 @@ use Laminas\Paginator\Adapter\AdapterInterface;
 use Laminas\Paginator\Adapter\Exception\MissingRowCountColumnException;
 use Laminas\Paginator\Exception;
 
+use function array_key_exists;
+use function is_array;
+use function iterator_to_array;
+use function strtolower;
+
 /**
  * @template-covariant TKey of int
  * @template-covariant TValue
@@ -20,31 +25,23 @@ use Laminas\Paginator\Exception;
  */
 class Select implements AdapterInterface
 {
-    /** @var Sql\Sql */
     protected Sql\Sql $sql;
 
     /**
      * Database query
-     *
-     * @var Sql\Select
      */
     protected Sql\Select $select;
 
     /**
      * Database count query
-     *
-     * @var null|Sql\Select
      */
     protected ?Sql\Select $countSelect;
 
-    /** @var ResultSetInterface */
     protected ResultSetInterface $resultSetPrototype;
     public const ROW_COUNT_COLUMN_NAME = 'C';
 
     /**
      * Total item count
-     *
-     * @var int
      */
     protected int $rowCount = 0;
 
@@ -52,7 +49,7 @@ class Select implements AdapterInterface
      * Constructs instance.
      *
      * @param Sql\Select $select The select query
-     * @param DbAdapterInterface|Sql\Sql $adapterOrSqlObject DB adapter or Sql\Sql object
+     * @param DBAdapterInterface|Sql\Sql $adapterOrSqlObject DB adapter or Sql\Sql object
      * @throws Exception\InvalidArgumentException
      */
     public function __construct(
@@ -103,16 +100,14 @@ class Select implements AdapterInterface
 
     /**
      * Returns the total number of rows in the result set.
-     *
-     * @return int
      */
     public function count(): int
     {
-        $select         = $this->getSelectCount();
-        $statement      = $this->sql->prepareStatementForSqlObject($select);
-        $result         = $statement->execute();
-        $row            = $result->current();
-        if (!is_array($row)) {
+        $select    = $this->getSelectCount();
+        $statement = $this->sql->prepareStatementForSqlObject($select);
+        $result    = $statement->execute();
+        $row       = $result->current();
+        if (! is_array($row)) {
             throw MissingRowCountColumnException::forColumn(self::ROW_COUNT_COLUMN_NAME);
         }
         $this->rowCount = $this->locateRowCount($row);
@@ -122,8 +117,6 @@ class Select implements AdapterInterface
 
     /**
      * Returns select query for count
-     *
-     * @return Sql\Select
      */
     protected function getSelectCount(): Sql\Select
     {
@@ -167,7 +160,6 @@ class Select implements AdapterInterface
      * @see https://github.com/laminas/laminas-paginator/issues/3 Reference for creating an internal cache ID
      *
      * @todo The next major version should rework the entire caching of a paginator.
-     * @return array
      */
     public function getArrayCopy(): array
     {
